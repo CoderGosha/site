@@ -1,0 +1,148 @@
+{
+  "jobs": [
+    {
+      "name": "LLC Gervig",
+      "work_period": "2023",
+      "site": "https://gervig.ru/",
+      "post": "C# Development Team Lead",
+      "work_type": "Remote Work",
+      "descriptions": [
+        {
+          "description": "Design and development of the core system for food production automation. Hardware integration, working with undocumented binary protocols. Utilizing Event-driven architecture and Kafka for fast and reliable message transmission between services. Conducting code reviews and mentoring developers. Development and optimization of microservices, load testing.",
+          "technology": "ASP.NET Core, EF Core, PostgreSQL, Docker, Kafka, OpenSearch, CQRS, event-driven architecture."
+        }
+      ]
+    },
+    {
+      "name": "Engy Company",
+      "work_period": "2020-2022",
+      "site": "http://www.en-gy.ru/",
+      "post": "Lead backend developer",
+      "work_type": "Remote",
+      "descriptions": [
+        {
+          "description": "I’m developing a high load backend for a parcel delivery system. I’m doing integration with partners API. \nI ported and migrated the parcel delivery system from ASP .NET to ASP .NET Core. Integration tests, performance optimization. I’m actively supporting core for Windows (IIS + Docker + MSSQL) and Linux (nginx + docker + postgreSQL). \n",
+          "technology": "TFS, Git.\nASP .Core, EF Core, Dapper, MSSQL, PostgreeSQL, Docker"
+        },
+        {
+          "description": "Pilot client project for postamat on python. The client used QT and worked on an embodied system (raspberry pi). Device management, bank acquiring, receiving and delivering parcels.",
+          "technology": "Python, Sqlite, PySide, Raspberry Pi"
+        }
+      ]
+    },
+    {
+      "name": "PSS. Software Company",
+      "work_period": "2018-2020",
+      "site": "http://itpss.ru/",
+      "post": "Senior software engineer",
+      "work_type": "Remote",
+      "descriptions": [
+        {
+          "description": "I supported and added new features to OPC Core (OPC Unified Architecture. NET Standard). I ported and migrated OPC Core from .NET Framework (Windows + MSSQL) to .NET Core (cross-platform). \nAnd I developed a microservice for the tickets bay system on ASP .Core. \nThe company used Microsoft Azure for building and deployment. \n",
+          "technology": "TFS, Git.\nASP .Core, EF Core, MSSQL, PostgreeSQL, Docker, RabbitMQ"
+        }
+      ]
+    },
+    {
+      "name": "Data Center Automatization Company",
+      "work_period": "2014-2018",
+      "site": "https://dc.ru/",
+      "post": "Software engineer",
+      "work_type": "Office",
+      "descriptions": [
+        {
+          "description": "I participated in the development of manufacturing real-time system tracking (level 2)\nReal time collection data, analysis manufacturing processes, integration with manufacturing microcontrollers. I developed tracking systems modules. I developed and supported a data collection system from weighing devices and controllers. \n",
+          "technology": "Git, SVN\nASP.NET, EF, MVC, WCF, REST, SOAP, SQL, MS SQL, Oracle,  UnitTests, JavaScript, С#, С++, HTML, CSS "
+        }
+      ]
+    }
+  ],
+  "edu": [
+    {
+      "name": "Cherepovets State University",
+      "work_period": "2009-2014 ",
+      "site": "https://www.chsu.ru/",
+      "post": "Software engineer - Specialist (like master's degree)",
+      "work_type": "Education",
+      "descriptions": [
+        {
+          "description": "Software for Computers and Computer-Aided Systems",
+          "result": "Dissertation: Data Scales - data collection system from weighing devices and controllers"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "C#",
+      "index": 1,
+      "data": [
+        ".NET Core",
+        "EF Core",
+        "Dapper",
+        "SQL",
+        "Migration .NET Framework -> .NET Core",
+        "Web API",
+        "Swagger/Open api",
+        "async/await",
+        "RabbitMQ",
+        "Andriod",
+        "Smart Watch"
+      ]
+    },
+    {
+      "name": "Python",
+      "index": 2,
+      "data": [
+        "Django",
+        "Django-rest",
+        "Web Api",
+        "WebSocket",
+        "asyncio",
+        "QT",
+        "Selenuim"
+      ]
+    },
+    {
+      "name": "Database",
+      "index": 3,
+      "data": [
+        "Oracle Database",
+        "MSSQL",
+        "PostgreSQL",
+        "MongoDB",
+        "SQLite"
+      ]
+    },
+    {
+      "name": "CI/CD",
+      "index": 4,
+      "data": [
+        "Docker",
+        "Docker Compose",
+        "TFS",
+        "GitHub",
+        "Gogs/Drone"
+      ]
+    },
+    {
+      "name": "Hardware & virtualization",
+      "index": 5,
+      "data": [
+        "DigitalOcean",
+        "Azure",
+        "VirtualBox",
+        "Embedded Systems (Raspberry Pi, PDT)",
+        "Garmin Watch (Monkey C)"
+      ]
+    },
+    {
+      "name": "Languages",
+      "index": 6,
+      "data": [
+        "Russian native",
+        "English B2"
+      ]
+    }
+  ]
+}

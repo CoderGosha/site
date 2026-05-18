@@ -1,0 +1,29 @@
+{
+  "name": "codergosha-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Personal site — Eleventy + Tailwind",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "sync": "node scripts/sync-content.js",
+    "dev": "npm run sync && eleventy --serve --watch",
+    "build": "npm run sync && eleventy",
+    "preview": "serve dist -l 8080",
+    "lint": "node --check scripts/sync-content.js && node --check eleventy.config.cjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-navigation": "^0.3.2",
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "html-minifier": "^4.0.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "postcss": "^8.5.3",
+    "postcss-import": "^16.1.0",
+    "serve": "^14.2.4",
+    "tailwindcss": "^3.4.17"
+  }
+}
