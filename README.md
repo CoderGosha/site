@@ -32,4 +32,12 @@ _archive_bio/ — архив старого проекта (источник, н
 
 ## Деплой
 
-После `npm run build` публикуйте содержимое каталога `dist/`.
+### GitHub Pages (автоматически)
+
+При push в `main` workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) собирает сайт и публикует `dist/` в ветку `gh-pages`.
+
+В настройках репозитория (**Settings → Pages**) укажите источник **Deploy from a branch**, ветка `gh-pages`, корень `/`. Домен `codergosha.com` задаётся через `cname` в workflow (нужна DNS-запись на GitHub Pages).
+
+### Вручную
+
+После `npm run build` можно залить содержимое каталога `dist/` на любой статический хостинг.
