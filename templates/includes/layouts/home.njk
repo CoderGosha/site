@@ -7,7 +7,10 @@ layout: layouts/site.njk
       <p class="kicker">{{ greeting }}</p>
       <h1>{{ heroTitle }}</h1>
       <div class="accent-line" aria-hidden="true"></div>
-      <p class="lead">{{ lead }}</p>
+      <div class="hero-lead">
+        <p class="lead">{{ lead }}</p>
+        {% if leadMore %}<p class="lead">{{ leadMore }}</p>{% endif %}
+      </div>
 
       <div class="action-row">
         <a class="btn primary" href="{{ resumeUrl | url }}">{{ ctaResume }}</a>

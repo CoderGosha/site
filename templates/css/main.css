@@ -271,6 +271,19 @@ h3 {
   font-size: clamp(1.02rem, 1.4vw, 1.17rem);
 }
 
+.hero-lead {
+  max-width: 62ch;
+  margin-bottom: 20px;
+}
+
+.hero-lead .lead {
+  margin: 0;
+}
+
+.hero-lead .lead + .lead {
+  margin-top: 14px;
+}
+
 .accent-line {
   width: 72px;
   height: 3px;
@@ -426,6 +439,14 @@ h3 {
 
 main + .contact-rail {
   margin-top: clamp(36px, 5vw, 78px);
+}
+
+main.home-main {
+  padding-bottom: clamp(10px, 1.4vw, 18px);
+}
+
+.home-main + .contact-rail {
+  margin-top: clamp(14px, 2vw, 28px);
 }
 
 .contact-rail > * {
