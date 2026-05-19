@@ -1,19 +1,31 @@
 ---
-layout: layouts/patched-base.njk
+layout: layouts/site.njk
+contactRail: full
 ---
-<div class="flex flex-col w-full items-start flex-grow">
-  <div class="text-5xl my-8 space-y-2 text-slate-800 dark:text-white">
-    <h2 class="font-medium text-6xl">{{ name }}</h2>
-    <p class="leading-relaxed">{{ header }}</p>
-  </div>
-  
-  <ul class="flex space-x-8 text-3xl my-10">
-    {% for link in links %}
-      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-    {% endfor %}
-  </ul>
-  
-  <div>
-    {{ content | safe }}
-  </div>
-</div>
+<main id="main" class="home-main">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="kicker">{{ greeting }}</p>
+      <h1>{{ heroTitle }}</h1>
+      <div class="accent-line" aria-hidden="true"></div>
+      <p class="lead">{{ lead }}</p>
+
+      <div class="action-row">
+        <a class="btn primary" href="{{ resumeUrl | url }}">{{ ctaResume }}</a>
+        <a class="btn secondary" href="{{ contactUrl | url }}">{{ ctaContact }}</a>
+      </div>
+
+      <div class="stat-row" aria-label="{{ statsLabel }}">
+        {% for stat in stats %}
+          <span><strong>{{ stat.value }}</strong><em>{{ stat.label }}</em></span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <aside class="profile-panel" aria-label="{{ profileLabel }}">
+      <figure class="portrait-photo">
+        <img src="{{ portrait | url }}" alt="{{ portraitAlt | default(name) }}" width="640" height="800" loading="eager" decoding="async">
+      </figure>
+    </aside>
+  </section>
+</main>

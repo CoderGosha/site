@@ -1,10 +1,19 @@
 ---
-layout: layouts/home.njk
+layout: layouts/site.njk
 permalink: 404.html
 eleventyExcludeFromCollections: true
+contactRail: compact
+pageKicker: "404"
+pageTitle: "Страница не найдена."
+pageLead: "Проверьте адрес или вернитесь на главную."
 ---
-
-<div class="flex flex-col items-center w-full">
-    <span class="text-9xl">404</span>
-    <span class="text-4xl tracking-wide">Not Found</span>
-</div>
+<main id="main" class="content-page">
+  <section class="page-hero">
+    <p class="kicker">{{ pageKicker }}</p>
+    <h1>{{ pageTitle }}</h1>
+    <p class="lead">{{ pageLead }}</p>
+    <div class="action-row">
+      <a class="btn primary" href="{{ '/' | url }}">На главную</a>
+    </div>
+  </section>
+</main>

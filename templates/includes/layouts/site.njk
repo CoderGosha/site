@@ -1,0 +1,11 @@
+---
+layout: layouts/patched-base.njk
+layoutSkipNav: true
+bodyClass: site-body
+---
+<a class="skip" href="#main">{{ skipLabel | default('Перейти к содержанию') }}</a>
+<div class="site-shell">
+  {% include "site-header.njk" %}
+  {{ content | safe }}
+  {% include "site-footer.njk" %}
+</div>

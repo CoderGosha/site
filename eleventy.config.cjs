@@ -165,9 +165,7 @@ module.exports = async function (eleventyConfig) {
         const url = urlByLang[lang];
         const languageLabel = LANGUAGES[lang].label ?? lang.toUpperCase();
         output += `
-          <a class="hidden sm:block hover:text-slate-900 hover:dark:text-white transition" href="${url}">
-            ${languageLabel}
-          </a>
+          <a class="menu-lang" href="${url}">${languageLabel}</a>
         `;
       }
     }

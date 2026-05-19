@@ -6,71 +6,43 @@
     <title>{{ title or intl.title }}</title>
     <meta name="description" content="{{ description or intl.description }}">
     <link rel="preload" href="{{ '/css/main.min.css' | url }}" as="style">
-    <link rel="stylesheet" href="{{ '/css/main.min.css' | url }}"/>
+    <link rel="stylesheet" href="{{ '/css/main.min.css' | url }}">
     {% hreflang intl.lang, page.url %}
-    <script>
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    </script>
     {% block headend %}{% endblock %}
   </head>
-  <body class="relative flex flex-col pt-14 items-center min-h-screen antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 transition-colors duration-500">
-    {% include "navigation.njk" %}
-
-    <main class="w-full flex-grow max-w-screen-2xl px-4 md:px-6 xl:px-8">
-      {% block content %}
-        {{ content | safe }}
-      {% endblock %}
-    </main>
-
-    <footer></footer>
+  <body class="{{ bodyClass or 'site-body' }}">
+    {% block content %}
+      {{ content | safe }}
+    {% endblock %}
     <script>
-      function toggleMode() {
-        const isDark = document.documentElement.classList.contains('dark')
-        const isSwitchToDark = !isDark
-        const isDarkSystem = window.matchMedia('(prefers-color-scheme: dark)').matches
-        const isSwitchToSystem = isSwitchToDark === isDarkSystem
-        
-        if (isSwitchToSystem) {
-          localStorage.removeItem('theme')
-        } else {
-          localStorage.setItem('theme', isSwitchToDark ? 'dark' : 'light')
+      (function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const menu = document.querySelector(".menu");
+        if (menuToggle && menu) {
+          menuToggle.addEventListener("click", function () {
+            const isOpen = menu.classList.toggle("open");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+          });
+          menu.addEventListener("click", function (event) {
+            if (event.target.matches("a")) {
+              menu.classList.remove("open");
+              menuToggle.setAttribute("aria-expanded", "false");
+            }
+          });
         }
 
-        document.documentElement.classList[isSwitchToDark ? 'add' : 'remove']('dark')
-      }
-      
-      
-
-      function hideMenu(menuId) {
-        const menuEl = document.getElementById(menuId)
-        const menuContentEl = document.getElementById(`${menuId}-content`)
-
-        menuContentEl.classList.remove('animate-slidein')
-        menuEl.classList.remove('animate-fadein')
-        menuContentEl.classList.add('animate-slideout')
-        menuEl.classList.add('animate-fadeout')
-        
-        setTimeout(function() {
-          document.body.classList.remove('overflow-hidden')
-          menuEl.classList.remove('flex')
-          menuEl.classList.add('hidden')
-          menuContentEl.classList.remove('animate-slideout')
-          menuEl.classList.remove('animate-fadeout')
-        }, 300)
-      }
-
-      function showMenu(menuId) {
-        const menuEl = document.getElementById(menuId)
-        const menuContentEl = document.getElementById(`${menuId}-content`)
-        document.body.classList.add('overflow-hidden')
-        menuEl.classList.remove('hidden')
-        menuEl.classList.add('flex', 'animate-fadein')
-        menuContentEl.classList.add('animate-slidein')
-      }
+        const contactForm = document.querySelector("[data-contact-form]");
+        const notice = document.querySelector("[data-contact-notice]");
+        if (contactForm && notice) {
+          contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            notice.hidden = false;
+            notice.className = "notice success";
+            notice.textContent = notice.dataset.success || "Спасибо. Продублируйте этот контекст на email, и я вернусь с техническими деталями.";
+            contactForm.reset();
+          });
+        }
+      })();
     </script>
     {% block bodyend %}{% endblock %}
   </body>
