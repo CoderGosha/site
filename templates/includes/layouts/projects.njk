@@ -6,7 +6,7 @@ layout: layouts/site.njk
     <div>
       <p class="kicker">{{ pageKicker | default('Проекты') }}</p>
       <h1>{{ pageTitle }}</h1>
-      <p class="lead">{{ pageLead }}</p>
+      {% if pageLead %}<p class="lead">{{ pageLead }}</p>{% endif %}
     </div>
   </section>
 

@@ -33,13 +33,21 @@ layout: layouts/site.njk
 
   <section class="cards-three">
     {% for job in jobs %}
-      {% if loop.index <= 3 %}
       <article class="paper-card">
         <h2>{{ job.name }}</h2>
         <p class="meta">{{ job.work_period }} · {{ job.post }}</p>
         <p>{{ job.descriptions[0].description }}</p>
       </article>
-      {% endif %}
+    {% endfor %}
+    {% for item in edu %}
+      <article class="paper-card">
+        <h2>{{ item.name }}</h2>
+        <p class="meta">{{ item.work_period }} · {{ item.post }}</p>
+        <p>{{ item.descriptions[0].description }}</p>
+        {% if item.descriptions[0].result %}
+          <p>{{ item.descriptions[0].result }}</p>
+        {% endif %}
+      </article>
     {% endfor %}
   </section>
 </main>
