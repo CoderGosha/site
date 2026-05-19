@@ -103,18 +103,21 @@ module.exports = async function (eleventyConfig) {
     return content;
   });
 
+  // src/ is regenerated on every build; watching it causes an infinite rebuild loop in --serve.
+  eleventyConfig.watchIgnores.add("./src/**");
+  eleventyConfig.watchIgnores.add("./dist/**");
+
   eleventyConfig.on("eleventy.before", async () => {
     syncContent();
 
-    await fs.promises.mkdir(path.join(INPUT_DIR, "css"), { recursive: true });
-    const css = await fs.promises.readFile(path.join(INPUT_DIR, "css", "main.css"));
+    const css = await fs.promises.readFile(path.join(ROOT, "templates", "css", "main.css"));
     const result = await require("postcss")([
       require("postcss-import"),
       require("tailwindcss/nesting"),
       require("tailwindcss")(path.join(ROOT, "tailwind.config.js")),
       require("autoprefixer"),
     ]).process(css, {
-      from: path.join(INPUT_DIR, "css", "main.css"),
+      from: path.join(ROOT, "templates", "css", "main.css"),
       to: path.join(OUTPUT_DIR, "css", "main.min.css"),
     });
 
@@ -124,6 +127,8 @@ module.exports = async function (eleventyConfig) {
 
   eleventyConfig.addWatchTarget("./content/");
   eleventyConfig.addWatchTarget("./templates/");
+  eleventyConfig.addWatchTarget("./templates/css/");
+  eleventyConfig.setWatchThrottleWaitTime(400);
 
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/**/*.pdf");

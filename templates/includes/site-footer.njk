@@ -1,9 +1,6 @@
 <footer class="contact-rail">
-  <span>{{ contact.location | default('Москва, Россия') }}</span>
+  <span>{{ contact.location | default('Санкт-Петербург, Россия') }}</span>
   <a href="mailto:{{ contact.email | default('coder.gosha@gmail.com') }}">{{ contact.email | default('coder.gosha@gmail.com') }}</a>
   <a href="{{ contact.github | default('https://github.com/CoderGosha') }}">GitHub</a>
-  {% if contactRail != 'compact' %}
-    <a href="{{ contact.linkedin | default('https://www.linkedin.com/in/codergosha/') }}">LinkedIn</a>
-    <a href="{{ contact.telegram | default('https://t.me/CoderGosha') }}">Telegram</a>
-  {% endif %}
+  <a href="{{ contact.telegram | default('https://t.me/CoderGosha') }}">Telegram</a>
 </footer>

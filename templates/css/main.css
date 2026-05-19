@@ -424,7 +424,7 @@ h3 {
   color: rgba(255, 255, 255, 0.84);
 }
 
-.home-main + .contact-rail {
+main + .contact-rail {
   margin-top: clamp(36px, 5vw, 78px);
 }
 
