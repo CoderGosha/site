@@ -519,6 +519,18 @@ main.home-main {
   max-width: 1080px;
 }
 
+.page-lead {
+  max-width: 62ch;
+}
+
+.page-lead .lead {
+  margin: 0;
+}
+
+.page-lead .lead + .lead {
+  margin-top: 14px;
+}
+
 .page-hero.compact {
   display: grid;
   grid-template-columns: 1fr minmax(250px, 340px);

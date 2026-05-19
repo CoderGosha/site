@@ -5,7 +5,10 @@ layout: layouts/site.njk
   <section class="page-hero">
     <p class="kicker">{{ pageKicker | default('Резюме') }}</p>
     <h1>{{ pageTitle | default('Руководитель группы разработки на C#.') }}</h1>
-    <p class="lead">{{ pageLead }}</p>
+    <div class="page-lead">
+      <p class="lead">{{ pageLead }}</p>
+      {% if pageLeadMore %}<p class="lead">{{ pageLeadMore }}</p>{% endif %}
+    </div>
   </section>
 
   <section class="two-column">
