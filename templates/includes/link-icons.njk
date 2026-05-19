@@ -1,0 +1,31 @@
+{% macro render(name, className, size) %}
+  {% set iconClass = className or "link-icon" %}
+  {% set px = size or 18 %}
+  {% if name == "email" %}
+    <svg class="{{ iconClass }}" width="{{ px }}" height="{{ px }}" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+  {% elif name == "telegram" %}
+    <svg class="{{ iconClass }}" width="{{ px }}" height="{{ px }}" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5 3.8 11.1c-.9.4-.9 1.6.1 1.9l4.6 1.4 1.8 5.6c.3.9 1.5.9 1.8 0l1.3-4.2 4.9 3.6c.7.5 1.6-.1 1.4-.9L21.5 4.5z"/><path d="M9.2 13.2 15 17"/></svg>
+  {% elif name == "linkedin" %}
+    <svg class="{{ iconClass }}" width="{{ px }}" height="{{ px }}" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-3c0-1.1.9-2 2-2s2 .9 2 2v3"/></svg>
+  {% elif name == "github" %}
+    <svg class="{{ iconClass }}" width="{{ px }}" height="{{ px }}" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+  {% elif name == "globe" %}
+    <svg class="{{ iconClass }}" width="{{ px }}" height="{{ px }}" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+  {% elif name == "location" %}
+    <svg class="{{ iconClass }}" width="{{ px }}" height="{{ px }}" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10z"/><circle cx="12" cy="11" r="2.25"/></svg>
+  {% endif %}
+{% endmacro %}
+
+{% macro forUrl(url) %}
+  {% if "mailto:" in url %}
+    {{ render("email") }}
+  {% elif "t.me" in url or "telegram" in url %}
+    {{ render("telegram") }}
+  {% elif "linkedin.com" in url %}
+    {{ render("linkedin") }}
+  {% elif "github.com" in url %}
+    {{ render("github") }}
+  {% else %}
+    {{ render("globe") }}
+  {% endif %}
+{% endmacro %}

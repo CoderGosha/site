@@ -1,41 +1,24 @@
 ---
 layout: layouts/site.njk
 ---
+{% from "link-icons.njk" import forUrl %}
 <main id="main" class="content-page">
   <section class="page-hero">
     <p class="kicker">{{ pageKicker | default('Контакты') }}</p>
     <h1>{{ pageTitle }}</h1>
-    <p class="lead">{{ pageLead }}</p>
+    {% if pageLead %}<p class="lead">{{ pageLead }}</p>{% endif %}
   </section>
 
-  <section class="two-column">
+  <section>
     <article class="paper-card">
-      <h2>{{ channelsTitle | default('Прямые каналы') }}</h2>
       <div class="contact-list">
         {% for channel in channels %}
-          <a href="{{ channel.url }}">{{ channel.label }}</a>
+          <a href="{{ channel.url }}" class="contact-link">
+            <span class="link-icon-box" aria-hidden="true">{{ forUrl(channel.url) }}</span>
+            <span>{{ channel.label }}</span>
+          </a>
         {% endfor %}
       </div>
-    </article>
-
-    <article class="paper-card">
-      <h2>{{ formTitle | default('Короткий запрос') }}</h2>
-      <form data-contact-form>
-        <label for="name">{{ formNameLabel | default('Имя') }}</label>
-        <input id="name" name="name" autocomplete="name" required>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" autocomplete="email" required>
-        <label for="topic">{{ formTopicLabel | default('Тема') }}</label>
-        <select id="topic" name="topic">
-          {% for option in formTopics %}
-            <option>{{ option }}</option>
-          {% endfor %}
-        </select>
-        <label for="message">{{ formMessageLabel | default('Контекст') }}</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-        <button class="btn primary" type="submit">{{ formSubmitLabel | default('Отправить запрос') }}</button>
-      </form>
-      <p class="notice" data-contact-notice data-success="{{ formSuccessNotice }}" hidden></p>
     </article>
   </section>
 </main>

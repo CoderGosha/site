@@ -430,10 +430,11 @@ main + .contact-rail {
 
 .contact-rail > * {
   display: flex;
-  min-height: 52px;
   align-items: center;
-  padding: 0 clamp(18px, 3vw, 48px);
+  min-height: 52px;
+  padding: 12px clamp(18px, 3vw, 48px);
   border-left: 1px solid rgba(255, 255, 255, 0.18);
+  box-sizing: border-box;
 }
 
 .contact-rail > *:first-child { border-left: 0; }
@@ -441,6 +442,51 @@ main + .contact-rail {
 .contact-rail a {
   color: #fff;
   text-decoration: none;
+}
+
+.contact-rail-item,
+.contact-rail-link {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  line-height: 1.2;
+}
+
+.contact-rail .link-icon--rail {
+  flex-shrink: 0;
+}
+
+.contact-rail-item > span:last-child,
+.contact-rail-link > span:last-child {
+  line-height: 1.35;
+}
+
+.contact-rail-link:hover {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.link-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  max-width: 18px;
+  max-height: 18px;
+  flex: 0 0 18px;
+  overflow: visible;
+  vertical-align: middle;
+}
+
+.link-icon--rail {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  flex: 0 0 16px;
+  opacity: 0.92;
 }
 
 .content-page {
@@ -555,6 +601,16 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+input:disabled,
+select:disabled,
+textarea:disabled,
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  user-select: none;
+}
+
 label {
   display: block;
   margin: 15px 0 7px;
@@ -634,15 +690,69 @@ label {
 
 .contact-list {
   display: grid;
-  gap: 12px;
+  gap: 0;
 }
 
-.contact-list a {
-  display: block;
-  border-bottom: 1px solid var(--border);
+.contact-list a,
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 52px;
   padding: 10px 0;
+  border-bottom: 1px solid var(--border);
   color: var(--accent);
   text-decoration: none;
+  line-height: 1.35;
+  transition: color 160ms ease;
+  box-sizing: border-box;
+}
+
+.contact-list a:last-child,
+.contact-link:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.contact-link > span:last-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.contact-link .link-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  flex: 0 0 40px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--paper));
+  box-sizing: border-box;
+}
+
+.contact-link .link-icon-box .link-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  max-width: 18px;
+  max-height: 18px;
+  flex: 0 0 18px;
+}
+
+.contact-link:hover {
+  color: #043f40;
+}
+
+.contact-link:hover .link-icon-box {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+  background: var(--accent-soft);
 }
 
 .notice {

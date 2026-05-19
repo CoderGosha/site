@@ -31,17 +31,6 @@
           });
         }
 
-        const contactForm = document.querySelector("[data-contact-form]");
-        const notice = document.querySelector("[data-contact-notice]");
-        if (contactForm && notice) {
-          contactForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            notice.hidden = false;
-            notice.className = "notice success";
-            notice.textContent = notice.dataset.success || "Спасибо. Продублируйте этот контекст на email, и я вернусь с техническими деталями.";
-            contactForm.reset();
-          });
-        }
       })();
     </script>
     {% block bodyend %}{% endblock %}

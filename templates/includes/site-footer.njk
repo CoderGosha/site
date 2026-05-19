@@ -1,6 +1,19 @@
+{% from "link-icons.njk" import render %}
 <footer class="contact-rail">
-  <span>{{ contact.location | default('Санкт-Петербург, Россия') }}</span>
-  <a href="mailto:{{ contact.email | default('coder.gosha@gmail.com') }}">{{ contact.email | default('coder.gosha@gmail.com') }}</a>
-  <a href="{{ contact.github | default('https://github.com/CoderGosha') }}">GitHub</a>
-  <a href="{{ contact.telegram | default('https://t.me/CoderGosha') }}">Telegram</a>
+  <span class="contact-rail-item">
+    {{ render("location", "link-icon link-icon--rail", 16) }}
+    <span>{{ contact.location | default('Санкт-Петербург, Россия') }}</span>
+  </span>
+  <a href="mailto:{{ contact.email | default('coder.gosha@gmail.com') }}" class="contact-rail-link">
+    {{ render("email", "link-icon link-icon--rail", 16) }}
+    <span>{{ contact.email | default('coder.gosha@gmail.com') }}</span>
+  </a>
+  <a href="{{ contact.github | default('https://github.com/CoderGosha') }}" class="contact-rail-link">
+    {{ render("github", "link-icon link-icon--rail", 16) }}
+    <span>GitHub</span>
+  </a>
+  <a href="{{ contact.telegram | default('https://t.me/CoderGosha') }}" class="contact-rail-link">
+    {{ render("telegram", "link-icon link-icon--rail", 16) }}
+    <span>Telegram</span>
+  </a>
 </footer>
