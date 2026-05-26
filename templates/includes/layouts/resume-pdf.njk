@@ -50,7 +50,7 @@ permalink: false
           </div>
         {% endif %}
 
-        <div class="resume-pdf__aside-block">
+        <div class="resume-pdf__aside-block resume-pdf__aside-block--stack">
           <h2 class="resume-pdf__aside-title">{{ pdfLabels.stack | default(stackTitle) | default('Технологии') }}</h2>
           <div class="resume-pdf__pills">
             {% for pill in stackPills %}
@@ -83,11 +83,6 @@ permalink: false
           </ul>
         </section>
 
-        {% if stackNote %}
-          <section class="resume-pdf__section resume-pdf__section--note">
-            <p class="resume-pdf__note">{{ stackNote }}</p>
-          </section>
-        {% endif %}
       </div>
     </main>
   </body>
