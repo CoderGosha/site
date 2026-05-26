@@ -13,7 +13,7 @@ permalink: false
   </head>
   <body class="resume-pdf-body">
     <main class="resume-pdf" id="main">
-      <aside class="resume-pdf__aside">
+      <aside class="resume-pdf__aside" aria-label="{{ pdfLabels.contact | default('Контакты') }}">
         <figure class="resume-pdf__photo">
           <img src="{{ (portraitPdf or portrait) | url }}" alt="{{ portraitAlt }}" width="336" height="336" decoding="sync">
         </figure>
@@ -50,7 +50,7 @@ permalink: false
           </div>
         {% endif %}
 
-        <div class="resume-pdf__aside-block resume-pdf__aside-block--stack">
+        <div class="resume-pdf__aside-block">
           <h2 class="resume-pdf__aside-title">{{ pdfLabels.stack | default(stackTitle) | default('Технологии') }}</h2>
           <div class="resume-pdf__pills">
             {% for pill in stackPills %}
@@ -60,29 +60,63 @@ permalink: false
         </div>
       </aside>
 
-      <div class="resume-pdf__main">
-        <header class="resume-pdf__header">
-          <h1>{{ name }}</h1>
-          <p class="resume-pdf__role">{{ role }}</p>
-        </header>
+      <div class="resume-pdf__content">
+        <div class="resume-pdf__intro">
+          <header class="resume-pdf__header">
+            <h1>{{ name }}</h1>
+            <p class="resume-pdf__role">{{ role }}</p>
+          </header>
 
-        <section class="resume-pdf__section">
-          <h2>{{ pdfLabels.summary | default('О себе') }}</h2>
-          <div class="resume-pdf__summary">
-            <p>{{ pageLead }}</p>
-            {% if pageLeadMore %}<p>{{ pageLeadMore }}</p>{% endif %}
+          <section class="resume-pdf__section">
+            <h2>{{ pdfLabels.summary | default('О себе') }}</h2>
+            <div class="resume-pdf__summary">
+              <p>{{ pageLead }}{% if pageLeadMore %} {{ pageLeadMore }}{% endif %}</p>
+            </div>
+          </section>
+
+          <section class="resume-pdf__section">
+            <h2>{{ pdfLabels.profile | default(profileTitle) | default('Ключевые направления') }}</h2>
+            <ul class="resume-pdf__list resume-pdf__list--compact">
+              {% for item in profileItems %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </section>
+        </div>
+
+        <section class="resume-pdf__section resume-pdf__section--experience">
+          <h2>{{ pdfLabels.experience | default('Опыт') }}</h2>
+          <div class="resume-pdf__experience">
+            {% for job in jobs %}
+              <article class="resume-pdf__job">
+                <h3>{{ job.name }}</h3>
+                <p class="resume-pdf__meta">{{ job.work_period }} · {{ job.post }}{% if job.work_type %} · {{ job.work_type }}{% endif %}</p>
+                {% for desc in job.descriptions %}
+                  <div class="resume-pdf__job-block">
+                    <p class="resume-pdf__job-text">{{ desc.description }}</p>
+                    {% if desc.technology %}
+                      <p class="resume-pdf__job-tech"><span>{{ pdfLabels.stackLabel | default('Технологии') }}:</span> {{ desc.technology | replace('\n', ' · ') }}</p>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </article>
+            {% endfor %}
+            {% for item in edu %}
+              <article class="resume-pdf__job">
+                <h3>{{ item.name }}</h3>
+                <p class="resume-pdf__meta">{{ item.work_period }} · {{ item.post }}{% if item.work_type %} · {{ item.work_type }}{% endif %}</p>
+                {% for desc in item.descriptions %}
+                  <div class="resume-pdf__job-block">
+                    <p class="resume-pdf__job-text">{{ desc.description }}</p>
+                    {% if desc.result %}
+                      <p class="resume-pdf__job-tech">{{ desc.result }}</p>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </article>
+            {% endfor %}
           </div>
         </section>
-
-        <section class="resume-pdf__section">
-          <h2>{{ pdfLabels.profile | default(profileTitle) | default('Ключевые направления') }}</h2>
-          <ul class="resume-pdf__list">
-            {% for item in profileItems %}
-              <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        </section>
-
       </div>
     </main>
   </body>

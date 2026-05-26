@@ -30,7 +30,6 @@
     "Oracle",
     "SQLite"
   ],
-  "stackNote": "Комфортно работаю с Linux и Windows production environments, промышленным оборудованием и embedded-сценариями.",
   "highlights": [
     { "value": "11+", "label": "лет в разработке" },
     { "value": "TL", "label": "руководство командой" },
@@ -49,6 +48,8 @@
     "contact": "Контакты",
     "profile": "Ключевые направления",
     "stack": "Технологии",
+    "experience": "Опыт",
+    "stackLabel": "Технологии",
     "summary": "О себе",
     "email": "Email",
     "telegram": "Telegram",
