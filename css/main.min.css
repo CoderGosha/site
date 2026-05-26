@@ -724,6 +724,10 @@ main.home-main {
   max-width: 1080px;
 }
 
+.page-hero__actions {
+  margin-top: 1.35rem;
+}
+
 .page-lead {
   max-width: 62ch;
 }
