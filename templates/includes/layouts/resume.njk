@@ -9,6 +9,12 @@ layout: layouts/site.njk
       <p class="lead">{{ pageLead }}</p>
       {% if pageLeadMore %}<p class="lead">{{ pageLeadMore }}</p>{% endif %}
     </div>
+    {% set pdfUrl = resumePdfUrl | default('/resume/resume_pakholkov_ru.pdf') %}
+    {% set pdfFilename = resumePdfFilename | default('ipakholkov_resume_ru.pdf') %}
+    {% set pdfLabel = resumePdfLabel | default('Скачать PDF') %}
+    <div class="action-row page-hero__actions">
+      <a class="btn primary" href="{{ pdfUrl | url }}" download="{{ pdfFilename }}">{{ pdfLabel }}</a>
+    </div>
   </section>
 
   <section class="two-column">

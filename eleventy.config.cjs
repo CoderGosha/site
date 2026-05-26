@@ -110,30 +110,47 @@ module.exports = async function (eleventyConfig) {
   eleventyConfig.on("eleventy.before", async () => {
     syncContent();
 
-    const css = await fs.promises.readFile(path.join(ROOT, "templates", "css", "main.css"));
-    const result = await require("postcss")([
+    await fs.promises.mkdir(path.join(OUTPUT_DIR, "css"), { recursive: true });
+
+    const postcss = require("postcss");
+    const postcssPlugins = [
       require("postcss-import"),
       require("tailwindcss/nesting"),
       require("tailwindcss")(path.join(ROOT, "tailwind.config.js")),
       require("autoprefixer"),
-    ]).process(css, {
+    ];
+
+    const mainCss = await fs.promises.readFile(path.join(ROOT, "templates", "css", "main.css"));
+    const mainResult = await postcss(postcssPlugins).process(mainCss, {
       from: path.join(ROOT, "templates", "css", "main.css"),
       to: path.join(OUTPUT_DIR, "css", "main.min.css"),
     });
+    await fs.promises.writeFile(path.join(OUTPUT_DIR, "css", "main.min.css"), mainResult.css);
 
-    await fs.promises.mkdir(path.join(OUTPUT_DIR, "css"), { recursive: true });
-    await fs.promises.writeFile(path.join(OUTPUT_DIR, "css", "main.min.css"), result.css);
+    const resumePdfCss = await fs.promises.readFile(
+      path.join(ROOT, "templates", "css", "resume-pdf.css")
+    );
+    const resumePdfResult = await postcss([require("autoprefixer")]).process(resumePdfCss, {
+      from: path.join(ROOT, "templates", "css", "resume-pdf.css"),
+      to: path.join(OUTPUT_DIR, "css", "resume-pdf.min.css"),
+    });
+    await fs.promises.writeFile(
+      path.join(OUTPUT_DIR, "css", "resume-pdf.min.css"),
+      resumePdfResult.css
+    );
   });
 
   eleventyConfig.addWatchTarget("./content/");
   eleventyConfig.addWatchTarget("./templates/");
   eleventyConfig.addWatchTarget("./templates/css/");
+  eleventyConfig.addWatchTarget("./templates/css/resume-pdf.css");
   eleventyConfig.setWatchThrottleWaitTime(400);
 
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/**/*.pdf");
 
   eleventyConfig.setServerOptions({
+    port: 8080,
     showVersion: false,
     domDiff: false,
   });

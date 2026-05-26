@@ -11,7 +11,9 @@
     "dev": "npm run sync && eleventy --serve --watch",
     "build": "npm run sync && eleventy",
     "preview": "serve dist -l 8080",
-    "lint": "node --check scripts/sync-content.js && node --check eleventy.config.cjs"
+    "portrait:pdf": "node scripts/prepare-portrait-pdf.mjs",
+    "resume:pdf": "node scripts/prepare-portrait-pdf.mjs && node scripts/generate-resume-pdf.mjs",
+    "lint": "node --check scripts/sync-content.js && node --check eleventy.config.cjs && node --check scripts/generate-resume-pdf.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
@@ -23,6 +25,7 @@
     "markdown-it-anchor": "^9.2.0",
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
+    "puppeteer": "^24.8.2",
     "serve": "^14.2.4",
     "tailwindcss": "^3.4.17"
   }

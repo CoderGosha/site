@@ -1,0 +1,94 @@
+---
+permalink: false
+---
+<!doctype html>
+<html lang="{{ intl.lang }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="{{ '/css/resume-pdf.min.css' | url }}">
+  </head>
+  <body class="resume-pdf-body">
+    <main class="resume-pdf" id="main">
+      <aside class="resume-pdf__aside">
+        <figure class="resume-pdf__photo">
+          <img src="{{ (portraitPdf or portrait) | url }}" alt="{{ portraitAlt }}" width="336" height="336" decoding="sync">
+        </figure>
+
+        <div class="resume-pdf__aside-block">
+          <h2 class="resume-pdf__aside-title">{{ pdfLabels.contact | default('Контакты') }}</h2>
+          <ul class="resume-pdf__contact">
+            <li>{{ contact.location }}</li>
+            <li>
+              <span class="resume-pdf__label">{{ pdfLabels.email | default('Email') }}</span>
+              <span class="resume-pdf__value">{{ contact.email }}</span>
+            </li>
+            <li>
+              <span class="resume-pdf__label">{{ pdfLabels.telegram | default('Telegram') }}</span>
+              <span class="resume-pdf__value">@CoderGosha</span>
+            </li>
+            <li>
+              <span class="resume-pdf__label">{{ pdfLabels.github | default('GitHub') }}</span>
+              <span class="resume-pdf__value">CoderGosha</span>
+            </li>
+          </ul>
+        </div>
+
+        {% if highlights %}
+          <div class="resume-pdf__aside-block">
+            <ul class="resume-pdf__stats">
+              {% for item in highlights %}
+                <li>
+                  <strong>{{ item.value }}</strong>
+                  <span>{{ item.label }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="resume-pdf__aside-block">
+          <h2 class="resume-pdf__aside-title">{{ pdfLabels.stack | default(stackTitle) | default('Технологии') }}</h2>
+          <div class="resume-pdf__pills">
+            {% for pill in stackPills %}
+              <span>{{ pill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </aside>
+
+      <div class="resume-pdf__main">
+        <header class="resume-pdf__header">
+          <h1>{{ name }}</h1>
+          <p class="resume-pdf__role">{{ role }}</p>
+        </header>
+
+        <section class="resume-pdf__section">
+          <h2>{{ pdfLabels.summary | default('О себе') }}</h2>
+          <div class="resume-pdf__summary">
+            <p>{{ pageLead }}</p>
+            {% if pageLeadMore %}<p>{{ pageLeadMore }}</p>{% endif %}
+          </div>
+        </section>
+
+        <section class="resume-pdf__section">
+          <h2>{{ pdfLabels.profile | default(profileTitle) | default('Ключевые направления') }}</h2>
+          <ul class="resume-pdf__list">
+            {% for item in profileItems %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+
+        {% if stackNote %}
+          <section class="resume-pdf__section resume-pdf__section--note">
+            <p class="resume-pdf__note">{{ stackNote }}</p>
+          </section>
+        {% endif %}
+      </div>
+    </main>
+  </body>
+</html>

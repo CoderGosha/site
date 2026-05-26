@@ -1,0 +1,53 @@
+{
+  "name": "Igor Pakholkov",
+  "role": "C# development team lead",
+  "portrait": "/img/portrait.jpg",
+  "portraitAlt": "Igor Pakholkov",
+  "pageLead": "Experienced backend developer and development team lead with more than 11 years in the field. I specialize in high-load system architecture, hardware integration, and microservice solutions.",
+  "pageLeadMore": "I currently lead a development team at a product company building the core system for food production automation. I actively design and use event-driven architecture, conduct load testing, and integrate with industrial equipment, including working with undocumented binary protocols.",
+  "profileTitle": "Profile",
+  "profileItems": [
+    "Design and development of the core system for food production automation.",
+    "Integration with GIS MT Chestny ZNAK: serialization, aggregation, code buffering, and data preparation for internal marking services.",
+    "Hardware integration and work with undocumented binary protocols.",
+    "Event-driven architecture and Kafka for fast, reliable messaging between services.",
+    "Code review, mentoring developers, microservice optimization, and load testing."
+  ],
+  "stackTitle": "Core stack",
+  "stackPills": [
+    ".NET Core",
+    "EF Core",
+    "Dapper",
+    "Web API",
+    "Python",
+    "Django",
+    "Kafka",
+    "RabbitMQ",
+    "Docker",
+    "PostgreSQL",
+    "MSSQL",
+    "Oracle",
+    "SQLite"
+  ],
+  "stackNote": "Comfortable with Linux and Windows production environments, industrial equipment, and embedded scenarios.",
+  "highlights": [
+    { "value": "11+", "label": "years in development" },
+    { "value": "TL", "label": "team leadership" },
+    { "value": "C#", "label": ".NET / primary stack" }
+  ],
+  "contact": {
+    "location": "Saint Petersburg, Russia",
+    "email": "coder.gosha@gmail.com",
+    "github": "https://github.com/CoderGosha",
+    "telegram": "https://t.me/CoderGosha"
+  },
+  "pdfLabels": {
+    "contact": "Contact",
+    "profile": "Focus areas",
+    "stack": "Technologies",
+    "summary": "Summary",
+    "email": "Email",
+    "telegram": "Telegram",
+    "github": "GitHub"
+  }
+}
