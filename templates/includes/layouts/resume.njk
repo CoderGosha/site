@@ -28,12 +28,14 @@ layout: layouts/site.njk
     </article>
     <aside class="paper-card">
       <h2>{{ stackTitle | default('Основной стек') }}</h2>
-      <div class="pill-cloud">
-        {% for pill in stackPills %}
-          <span>{{ pill }}</span>
-        {% endfor %}
-      </div>
-      <p>{{ stackNote }}</p>
+      {% for skill in skills | sort(attribute='index') %}
+        <h3>{{ skill.name }}</h3>
+        <div class="pill-cloud">
+          {% for item in skill.data %}
+            <span>{{ item }}</span>
+          {% endfor %}
+        </div>
+      {% endfor %}
     </aside>
   </section>
 

@@ -83,7 +83,6 @@
         "SQL",
         "Миграция .NET Framework -> .NET Core",
         "Web API",
-        "Swagger/Open api",
         "async/await",
         "RabbitMQ",
         "Android",
@@ -95,8 +94,6 @@
       "index": 2,
       "data": [
         "Django",
-        "Django-rest",
-        "Web Api",
         "WebSocket",
         "asyncio",
         "QT",
@@ -120,7 +117,7 @@
       "data": [
         "Docker",
         "Docker Compose",
-        "TFS",
+        "GitLab",
         "GitHub",
         "Gogs/Drone"
       ]
@@ -129,9 +126,6 @@
       "name": "Hardware & virtualization",
       "index": 5,
       "data": [
-        "DigitalOcean",
-        "Azure",
-        "VirtualBox",
         "Embedded Systems (Raspberry Pi, ТСД)",
         "Garmin Watch (Monkey C)"
       ]
