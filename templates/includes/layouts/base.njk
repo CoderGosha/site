@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title or intl.title }}</title>
     <meta name="description" content="{{ description or intl.description }}">
+    {% if robotsMeta %}<meta name="robots" content="{{ robotsMeta }}">{% endif %}
     <link rel="preload" href="{{ '/css/main.min.css' | url }}" as="style">
     <link rel="stylesheet" href="{{ '/css/main.min.css' | url }}">
     {% hreflang intl.lang, page.url %}
+    {% socialMeta page.url, (title or intl.title), (description or intl.description) %}
+    {% personSchema page.url %}
     {% block headend %}{% endblock %}
   </head>
   <body class="{{ bodyClass or 'site-body' }}">

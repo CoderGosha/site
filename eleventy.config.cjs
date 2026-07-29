@@ -14,7 +14,16 @@ function syncContent() {
 }
 
 function fixPath(p) {
-  return p.replace(/\/{2,}/g, "/");
+  // Collapse repeated slashes, but leave the "://" after a URL scheme intact.
+  return p.replace(/(?<!:)\/{2,}/g, "/");
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function loadLanguages() {
@@ -89,6 +98,11 @@ module.exports = async function (eleventyConfig) {
     return urlByLang;
   }
 
+  function getSelfAbsoluteUrl(url) {
+    const pageLang = getLanguageCodeByURL(url);
+    return getAllLanguagesForURL(url, true)[pageLang];
+  }
+
   eleventyConfig.addPlugin(require("@11ty/eleventy-navigation"));
 
   eleventyConfig.addTransform("minification", function (content) {
@@ -148,6 +162,7 @@ module.exports = async function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/**/*.pdf");
+  eleventyConfig.addPassthroughCopy("src/robots.txt");
 
   eleventyConfig.setServerOptions({
     port: 8080,
@@ -228,6 +243,66 @@ module.exports = async function (eleventyConfig) {
       }
     }
     return output;
+  });
+
+  eleventyConfig.addFilter("absoluteUrl", getSelfAbsoluteUrl);
+
+  const OG_LOCALE_BY_LANG = { ru: "ru_RU", en: "en_US" };
+
+  eleventyConfig.addShortcode("socialMeta", function (url, title, description) {
+    const pageLang = getLanguageCodeByURL(url);
+    const canonicalUrl = getSelfAbsoluteUrl(url);
+    const image = fixPath(`${LANGUAGES[DEFAULT_LANGUAGE_CODE].base_url}/img/portrait.jpg`);
+    const locale = OG_LOCALE_BY_LANG[pageLang] ?? OG_LOCALE_BY_LANG[DEFAULT_LANGUAGE_CODE];
+    const safeTitle = escapeHtml(title);
+    const safeDescription = escapeHtml(description);
+
+    return `
+        <link rel="canonical" href="${canonicalUrl}">
+        <meta property="og:type" content="profile">
+        <meta property="og:site_name" content="CoderGosha">
+        <meta property="og:locale" content="${locale}">
+        <meta property="og:url" content="${canonicalUrl}">
+        <meta property="og:title" content="${safeTitle}">
+        <meta property="og:description" content="${safeDescription}">
+        <meta property="og:image" content="${image}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="${safeTitle}">
+        <meta name="twitter:description" content="${safeDescription}">
+        <meta name="twitter:image" content="${image}">
+        `;
+  });
+
+  const PERSON_BY_LANG = {
+    ru: { name: "Игорь Пахолков", jobTitle: "Руководитель группы разработки на C#" },
+    en: { name: "Igor Pakholkov", jobTitle: "C# development team lead" },
+  };
+
+  eleventyConfig.addShortcode("personSchema", function (url) {
+    const pageLang = getLanguageCodeByURL(url);
+    const person = PERSON_BY_LANG[pageLang] ?? PERSON_BY_LANG[DEFAULT_LANGUAGE_CODE];
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: person.name,
+      alternateName: "CoderGosha",
+      jobTitle: person.jobTitle,
+      url: LANGUAGES[pageLang].base_url,
+      image: fixPath(`${LANGUAGES[DEFAULT_LANGUAGE_CODE].base_url}/img/portrait.jpg`),
+      email: "mailto:coder.gosha@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Saint Petersburg",
+        addressCountry: "RU",
+      },
+      sameAs: [
+        "https://github.com/CoderGosha",
+        "https://www.linkedin.com/in/codergosha/",
+        "https://t.me/CoderGosha",
+      ],
+    };
+
+    return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
   });
 
   return {
