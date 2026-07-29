@@ -27,7 +27,11 @@ layout: layouts/site.njk
 
     <aside class="profile-panel" aria-label="{{ profileLabel }}">
       <figure class="portrait-photo">
-        <img src="{{ portrait | url }}" alt="{{ portraitAlt | default(name) }}" width="640" height="800" loading="eager" decoding="async">
+        <picture>
+          <source srcset="{{ (portrait | replace('.jpg', '.avif')) | url }}" type="image/avif">
+          <source srcset="{{ (portrait | replace('.jpg', '.webp')) | url }}" type="image/webp">
+          <img src="{{ portrait | url }}" alt="{{ portraitAlt | default(name) }}" width="640" height="800" loading="eager" decoding="async">
+        </picture>
       </figure>
     </aside>
   </section>

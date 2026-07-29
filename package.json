@@ -12,6 +12,7 @@
     "build": "npm run sync && eleventy",
     "preview": "serve dist -l 8080",
     "portrait:pdf": "node scripts/prepare-portrait-pdf.mjs",
+    "portrait:web": "node scripts/optimize-portrait.mjs",
     "resume:pdf": "node scripts/prepare-portrait-pdf.mjs && node scripts/generate-resume-pdf.mjs",
     "lint": "node --check scripts/sync-content.js && node --check eleventy.config.cjs && node --check scripts/generate-resume-pdf.mjs"
   },
@@ -27,6 +28,7 @@
     "postcss-import": "^16.1.0",
     "puppeteer": "^24.8.2",
     "serve": "^14.2.4",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.17"
   }
 }
