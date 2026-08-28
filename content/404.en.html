@@ -1,0 +1,33 @@
+---json
+{
+  "layout": "layouts/site.njk",
+  "permalink": "en/404.html",
+  "eleventyExcludeFromCollections": true,
+  "robotsMeta": "noindex, follow",
+  "title": "Page not found — Igor Pakholkov",
+  "description": "This page does not exist. Check the address or go back to the home page.",
+  "name": "Igor Pakholkov",
+  "header": "C# development team lead",
+  "role": "C# development team lead",
+  "pageKicker": "404",
+  "pageTitle": "Page not found",
+  "pageLead": "Check the address or go back to the home page.",
+  "homeCta": "Go to home page",
+  "contact": {
+    "location": "Saint Petersburg, Russia",
+    "email": "coder.gosha@gmail.com",
+    "github": "https://github.com/CoderGosha",
+    "telegram": "https://t.me/CoderGosha"
+  }
+}
+---
+<main id="main" class="content-page">
+  <section class="page-hero">
+    <p class="kicker">{{ pageKicker }}</p>
+    <h1>{{ pageTitle }}</h1>
+    <p class="lead">{{ pageLead }}</p>
+    <div class="action-row">
+      <a class="btn primary" href="{{ intl.ui.home_path | url }}">{{ homeCta }}</a>
+    </div>
+  </section>
+</main>

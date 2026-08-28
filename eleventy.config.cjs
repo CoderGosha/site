@@ -163,6 +163,7 @@ module.exports = async function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/**/*.pdf");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
 
   eleventyConfig.setServerOptions({
     port: 8080,
@@ -228,20 +229,22 @@ module.exports = async function (eleventyConfig) {
     return output;
   });
 
-  eleventyConfig.addShortcode("hreflang", function (lang_code, url) {
-    const pageLang = getLanguageCodeByURL(url);
+  // Google expects every alternate set to be reciprocal and self-referencing.
+  eleventyConfig.addShortcode("hreflang", function (url) {
     const urlByLang = getAllLanguagesForURL(url, true);
     let output = "";
 
     for (const lang in urlByLang) {
-      if (lang !== pageLang) {
-        const href = urlByLang[lang];
-        const languageLang = LANGUAGES[lang].lang ?? lang;
-        output += `
-        <link rel="alternate" href="${href}" hrefLang="${languageLang}"/>
+      const languageLang = LANGUAGES[lang].lang ?? lang;
+      output += `
+        <link rel="alternate" href="${urlByLang[lang]}" hreflang="${languageLang}"/>
         `;
-      }
     }
+
+    output += `
+        <link rel="alternate" href="${urlByLang[DEFAULT_LANGUAGE_CODE]}" hreflang="x-default"/>
+        `;
+
     return output;
   });
 
@@ -249,16 +252,23 @@ module.exports = async function (eleventyConfig) {
 
   const OG_LOCALE_BY_LANG = { ru: "ru_RU", en: "en_US" };
 
+  // Social cards crop to ~1.91:1, so they get a dedicated cover, not the portrait.
+  const OG_IMAGE_BY_LANG = {
+    ru: { file: "/img/og-cover.jpg", alt: "Игорь Пахолков — руководитель группы разработки на C#" },
+    en: { file: "/img/og-cover-en.jpg", alt: "Igor Pakholkov — C# development team lead" },
+  };
+
   eleventyConfig.addShortcode("socialMeta", function (url, title, description) {
     const pageLang = getLanguageCodeByURL(url);
     const canonicalUrl = getSelfAbsoluteUrl(url);
-    const image = fixPath(`${LANGUAGES[DEFAULT_LANGUAGE_CODE].base_url}/img/portrait.jpg`);
+    const cover = OG_IMAGE_BY_LANG[pageLang] ?? OG_IMAGE_BY_LANG[DEFAULT_LANGUAGE_CODE];
+    const image = fixPath(`${LANGUAGES[DEFAULT_LANGUAGE_CODE].base_url}/${cover.file}`);
     const locale = OG_LOCALE_BY_LANG[pageLang] ?? OG_LOCALE_BY_LANG[DEFAULT_LANGUAGE_CODE];
     const safeTitle = escapeHtml(title);
     const safeDescription = escapeHtml(description);
+    const safeImageAlt = escapeHtml(cover.alt);
 
     return `
-        <link rel="canonical" href="${canonicalUrl}">
         <meta property="og:type" content="profile">
         <meta property="og:site_name" content="CoderGosha">
         <meta property="og:locale" content="${locale}">
@@ -266,10 +276,14 @@ module.exports = async function (eleventyConfig) {
         <meta property="og:title" content="${safeTitle}">
         <meta property="og:description" content="${safeDescription}">
         <meta property="og:image" content="${image}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="${safeImageAlt}">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="${safeTitle}">
         <meta name="twitter:description" content="${safeDescription}">
         <meta name="twitter:image" content="${image}">
+        <meta name="twitter:image:alt" content="${safeImageAlt}">
         `;
   });
 

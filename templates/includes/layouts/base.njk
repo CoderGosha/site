@@ -8,7 +8,14 @@
     {% if robotsMeta %}<meta name="robots" content="{{ robotsMeta }}">{% endif %}
     <link rel="preload" href="{{ '/css/main.min.css' | url }}" as="style">
     <link rel="stylesheet" href="{{ '/css/main.min.css' | url }}">
-    {% hreflang intl.lang, page.url %}
+    <link rel="icon" href="{{ '/favicon.ico' | url }}" sizes="32x32">
+    <link rel="icon" href="{{ '/img/favicon.svg' | url }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ '/img/apple-touch-icon.png' | url }}">
+    <meta name="theme-color" content="#064f4f">
+    {% if not robotsMeta %}
+      <link rel="canonical" href="{{ page.url | absoluteUrl }}">
+      {% hreflang page.url %}
+    {% endif %}
     {% socialMeta page.url, (title or intl.title), (description or intl.description) %}
     {% personSchema page.url %}
     {% block headend %}{% endblock %}

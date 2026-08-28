@@ -1,0 +1,30 @@
+---json
+{
+  "layout": "layouts/site.njk",
+  "permalink": "404.html",
+  "eleventyExcludeFromCollections": true,
+  "robotsMeta": "noindex, follow",
+  "title": "Страница не найдена — Игорь Пахолков",
+  "description": "Такой страницы нет. Проверьте адрес или вернитесь на главную.",
+  "pageKicker": "404",
+  "pageTitle": "Страница не найдена",
+  "pageLead": "Проверьте адрес или вернитесь на главную.",
+  "homeCta": "На главную",
+  "contact": {
+    "location": "Санкт-Петербург, Россия",
+    "email": "coder.gosha@gmail.com",
+    "github": "https://github.com/CoderGosha",
+    "telegram": "https://t.me/CoderGosha"
+  }
+}
+---
+<main id="main" class="content-page">
+  <section class="page-hero">
+    <p class="kicker">{{ pageKicker }}</p>
+    <h1>{{ pageTitle }}</h1>
+    <p class="lead">{{ pageLead }}</p>
+    <div class="action-row">
+      <a class="btn primary" href="{{ intl.ui.home_path | url }}">{{ homeCta }}</a>
+    </div>
+  </section>
+</main>

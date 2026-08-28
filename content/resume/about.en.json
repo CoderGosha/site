@@ -29,6 +29,10 @@
     "Oracle",
     "SQLite"
   ],
+  "resumePdfUrl": "/resume/resume_pakholkov_ru.pdf",
+  "resumePdfLabel": "Download PDF (in Russian)",
+  "resumePdfFilename": "ipakholkov_resume_ru.pdf",
+  "resumePdfLang": "ru",
   "highlights": [
     { "value": "11+", "label": "years in development" },
     { "value": "TL", "label": "team leadership" },

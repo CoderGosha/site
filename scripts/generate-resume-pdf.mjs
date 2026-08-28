@@ -36,11 +36,13 @@ async function loadPuppeteer() {
   }
 }
 
-function ensureDist() {
-  if (!fs.existsSync(DIST)) {
-    console.log("dist/ not found, running build…");
-    execSync("npm run build", { cwd: ROOT, stdio: "inherit" });
-  }
+function buildWithPrintPage() {
+  // The print page is only emitted for this build, never for the published site.
+  execSync("npm run build", {
+    cwd: ROOT,
+    stdio: "inherit",
+    env: { ...process.env, BUILD_RESUME_PRINT: "1" },
+  });
 }
 
 function ensurePortraitPdf() {
@@ -174,7 +176,7 @@ async function generatePdf(browser, baseUrl) {
 
 async function main() {
   ensurePortraitPdf();
-  ensureDist();
+  buildWithPrintPage();
   const puppeteer = await loadPuppeteer();
   const browser = await puppeteer.default.launch({ headless: true });
   const server = await startStaticServer();

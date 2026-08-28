@@ -10,7 +10,12 @@
     "ui": {
       "menu_mobile_title": "Меню",
       "intl_mobile_title": "Выберите язык",
-      "dark_mode_toggle_title": "Переключатель темной и светлой темы"
+      "dark_mode_toggle_title": "Переключатель темной и светлой темы",
+      "home_path": "/",
+      "home_label": "главная",
+      "initials": "ИП",
+      "nav_label": "Основная навигация",
+      "skip_to_content": "Перейти к содержанию"
     }
   },
   {
@@ -24,7 +29,12 @@
     "ui": {
       "menu_mobile_title": "Menu",
       "intl_mobile_title": "Select language",
-      "dark_mode_toggle_title": "Switch dark and light theme"
+      "dark_mode_toggle_title": "Switch dark and light theme",
+      "home_path": "/en/",
+      "home_label": "home",
+      "initials": "IP",
+      "nav_label": "Main navigation",
+      "skip_to_content": "Skip to content"
     }
   }
 ]

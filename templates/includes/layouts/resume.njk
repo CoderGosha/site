@@ -13,7 +13,7 @@ layout: layouts/site.njk
     {% set pdfFilename = resumePdfFilename | default('ipakholkov_resume_ru.pdf') %}
     {% set pdfLabel = resumePdfLabel | default('Скачать PDF') %}
     <div class="action-row page-hero__actions">
-      <a class="btn primary" href="{{ pdfUrl | url }}" download="{{ pdfFilename }}">{{ pdfLabel }}</a>
+      <a class="btn primary" href="{{ pdfUrl | url }}"{% if resumePdfLang %} hreflang="{{ resumePdfLang }}"{% endif %} download="{{ pdfFilename }}">{{ pdfLabel }}</a>
     </div>
   </section>
 

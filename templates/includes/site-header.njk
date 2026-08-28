@@ -1,13 +1,13 @@
 <header class="site-header">
-  <a class="brand" href="{{ '/' | url }}" aria-label="{{ name or intl.logo }}, {{ navHomeLabel | default('главная') }}">
-    <span class="brand-logo" aria-hidden="true">{{ initials | default('ИП') }}</span>
+  <a class="brand" href="{{ intl.ui.home_path | url }}" aria-label="{{ name or intl.logo }}, {{ navHomeLabel | default(intl.ui.home_label) }}">
+    <span class="brand-logo" aria-hidden="true">{{ initials | default(intl.ui.initials) }}</span>
     <span class="brand-copy">
       <strong>{{ name or intl.logo }}</strong>
       {% if header or role %}<em>{{ header or role }}</em>{% endif %}
     </span>
   </a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-label="{{ intl.ui.menu_mobile_title }}">{{ intl.ui.menu_mobile_title }}</button>
-  <nav class="menu" aria-label="{{ navLabel | default(intl.ui.menu_mobile_title) }}">
+  <nav class="menu" aria-label="{{ navLabel | default(intl.ui.nav_label) }}">
     {%- for entry in collections.all | eleventyNavigation | multiLangNav(page.url) %}
       <a
         href="{{ entry.url | url }}"
